@@ -5,11 +5,21 @@ import {AiFillPlusCircle} from "react-icons/ai";
 import {db} from "./config/firebase";
 import {collection, getDocs } from "firebase/firestore"
 import ContactCard from './components/ContactCard';
+import AddAndUpdateContact from './components/AddAndUpdateContact';
 
 const App = () => {
 
 
   const [contacts,setContacts] =useState([]);
+
+  const [isOpen, setOpen]= useState(false);
+
+  const onOpen=()=>{
+    setOpen(true);
+  };
+  const onClose=()=>{
+    setOpen(false);
+  }
 
   useEffect(()=>{
     const getContacts = async ()=>{
@@ -39,6 +49,7 @@ const App = () => {
 
 
   return (
+    <>
     <div className='max-w-[370px] mx-auto px-4 '>
       <NavBar/>
       <div className='flex gap-2'>
@@ -47,7 +58,7 @@ const App = () => {
         <input type='text' className=' flex-grow  rounded-md border border-white bg-transparent h-10 text-white pl-9'/>
       </div>
       
-        <AiFillPlusCircle className='text-5xl text-white cursor-pointer'/>
+        <AiFillPlusCircle onClick={onOpen} className='text-5xl text-white cursor-pointer'/>
 
       </div>
       <div className='mt-4 gap-3 flex-col'>{
@@ -56,7 +67,9 @@ const App = () => {
         ))} 
         </div>
     </div>
+    <AddAndUpdateContact onClose={onClose} isOpen={isOpen}/>   </>
   )
 }
+
 
 export default App
