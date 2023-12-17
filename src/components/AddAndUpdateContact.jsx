@@ -3,7 +3,7 @@ import Modal from './Modal'
 import {Field, Form, Formik  } from "formik";
 import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const AddAndUpdateContact = ({isOpen,onClose,isUpdate,contact}) => {
 
