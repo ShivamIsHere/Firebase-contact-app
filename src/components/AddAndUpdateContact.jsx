@@ -13,7 +13,7 @@ const AddAndUpdateContact = ({isOpen,onClose,isUpdate,contact}) => {
       const contactRef = collection(db,"contacts");
       await addDoc(contactRef,contact);
       onClose();
-      // toast.success("Contact Added Successfully")
+      toast.success("Contact Added Successfully")
   
     }catch (error){
       console.log(error);
@@ -25,7 +25,7 @@ const AddAndUpdateContact = ({isOpen,onClose,isUpdate,contact}) => {
       const contactRef = doc(db,"contacts",id);
       await updateDoc(contactRef,contact);
       onClose();
-      // toast.success("Contact Updated Successfully")
+      toast.success("Contact Updated Successfully")
       
     }catch (error){
       console.log(error);
