@@ -7,6 +7,8 @@ import {collection, getDocs, onSnapshot, snapshotEqual } from "firebase/firestor
 import ContactCard from './components/ContactCard';
 import AddAndUpdateContact from './components/AddAndUpdateContact';
 import useDisclouse from './hooks/useDisclouse';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
@@ -73,7 +75,10 @@ const App = () => {
         ))} 
         </div>
     </div>
-    <AddAndUpdateContact onClose={onClose} isOpen={isOpen}/>   </>
+    <AddAndUpdateContact onClose={onClose} isOpen={isOpen}/>
+    {/* if we remove position='bottom-center' than it will show toast at the top */}
+  {/* <ToastContainer position='bottom-center' /> */}
+  </>
   )
 }
 
