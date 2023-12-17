@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import {FiSearch} from "react-icons/fi";
 import {AiFillPlusCircle} from "react-icons/ai";
 import {db} from "./config/firebase";
-import {collection, getDocs } from "firebase/firestore"
+import {collection, getDocs, onSnapshot, snapshotEqual } from "firebase/firestore"
 import ContactCard from './components/ContactCard';
 import AddAndUpdateContact from './components/AddAndUpdateContact';
 import useDisclouse from './hooks/useDisclouse';
@@ -21,16 +21,27 @@ const App = () => {
 
       try{
         const contactsRef =collection(db,"contacts")
-        const contactsSnapshot = await getDocs(contactsRef);
+        // const contactsSnapshot = await getDocs(contactsRef);
         // console.log(contactsSnapshot)
-        const contactsLists = contactsSnapshot.docs.map((doc)=>{
-          return {
-            id: doc.id,
-            ...doc.data(),
-          };
+
+
+        onSnapshot(contactsRef,(snapshot)=>{
+          // const contactsLists = contactsSnapshot.docs.map((doc)=>{
+            const contactsLists = snapshot.docs.map((doc)=>{
+
+            return {
+              id: doc.id,
+              ...doc.data(),
+            };
+          });
+          // console.log(contactsLists)
+          setContacts(contactsLists);
+          return contactsLists;
         });
-        // console.log(contactsLists)
-        setContacts(contactsLists);
+
+
+
+        
       
       }catch(error){
         console.log(error);
